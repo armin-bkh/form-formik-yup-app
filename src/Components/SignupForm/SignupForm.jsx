@@ -6,14 +6,16 @@ const initialValues = {
   password: "",
 };
 const SignupForm = () => {
-  const formik = useFormik({
+  const { values, handleChange } = useFormik({
     initialValues,
   });
-
+  
   const submitHandler = (e) => {
-    e.preventDefault();
-    console.log(formik.values);
-  };
+      e.preventDefault();
+      console.log(values);
+    };
+    
+    const { name, email, password } = values;
 
   return (
     <form
@@ -30,8 +32,8 @@ const SignupForm = () => {
           type="text"
           name="name"
           placeholder="Name..."
-          value={formik.values.name}
-          onChange={formik.handleChange}
+          value={name}
+          onChange={handleChange}
         />
       </fieldset>
       <fieldset className={`flex flex-col mb-5 text-gray-300`}>
@@ -41,8 +43,8 @@ const SignupForm = () => {
           type="text"
           name="email"
           placeholder="Email..."
-          value={formik.values.email}
-          onChange={formik.handleChange}
+          value={email}
+          onChange={handleChange}
         />
       </fieldset>
       <fieldset className={`flex flex-col mb-5 text-gray-300`}>
@@ -52,8 +54,8 @@ const SignupForm = () => {
           type="text"
           name="password"
           placeholder="Password..."
-          value={formik.values.password}
-          onChange={formik.handleChange}
+          value={password}
+          onChange={handleChange}
         />
       </fieldset>
       <button
