@@ -1,10 +1,11 @@
+import SignupForm from '../Components/SignupForm/SignupForm';
 import './App.scss';
 
 const App = () => {
   return (
-    <div className={`text-5xl bg-blue-400`}>
-      hi
-    </div>
+    <main className={`bg-gray-900 min-h-screen w-full flex justify-center items-center`}>
+      <SignupForm />
+    </main>
   );
 }
 
