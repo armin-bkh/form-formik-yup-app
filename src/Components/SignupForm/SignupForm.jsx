@@ -23,7 +23,7 @@ const SignupForm = () => {
 
   return (
     <form
-      className={`w-full md:max-w-lg rounded-md p-5 bg-pink-400 bg-opacity-40 backdrop-blur-md`}
+      className={`w-full md:max-w-lg rounded-md p-5 bg-pink-400 bg-opacity-30 backdrop-blur-md`}
       onSubmit={submitHandler}
     >
       <h1 className={`text-blue-400 text-2xl md:text-5xl mb-10`}>Signup</h1>
