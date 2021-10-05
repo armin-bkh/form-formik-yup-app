@@ -1,4 +1,5 @@
 import { useFormik } from "formik";
+import * as Yup from 'yup';
 
 const initialValues = {
   name: "",
@@ -10,24 +11,18 @@ const onSubmit = (values) =>{
   console.log(values);
 }
 
-const validate = (values) =>{
-  let errors = {};
-
-  if(!values.name) errors.name = "Name is required";
-  if(!values.email) errors.email = "Email is required";
-  if(!values.password) errors.password = "Password is required";
-
-  return errors;
-}
+const validationSchema = Yup.object({
+  name: Yup.string().required('name is required'),
+  email: Yup.string().email('email format is invalid').required('email is required'),
+  password: Yup.string().required('password is required')
+})
 
 const SignupForm = () => {
-  const { values, handleChange, handleSubmit, errors, handleBlur, touched } = useFormik({
+  const { handleSubmit, errors, touched, getFieldProps } = useFormik({
     initialValues,
     onSubmit,
-    validate,
+    validationSchema,
   });
-
-  const { name, email, password } = values;
 
   return (
     <form
@@ -45,9 +40,7 @@ const SignupForm = () => {
           type="text"
           name="name"
           placeholder="Name..."
-          value={name}
-          onBlur={handleBlur}
-          onChange={handleChange}
+          {...getFieldProps('name')}
         />
         {errors.name && touched.name && <span className={`text-red-500 text-xs mt-1 ml-3`}>{errors.name}</span>}
       </fieldset>
@@ -59,9 +52,8 @@ const SignupForm = () => {
           type="text"
           name="email"
           placeholder="Email..."
-          value={email}
-          onBlur={handleBlur}
-          onChange={handleChange}
+          {...getFieldProps('email')}
+
         />
         {errors.email && touched.email && <span className={`text-red-500 text-xs mt-1 ml-3`}>{errors.email}</span>}
       </fieldset>
@@ -73,9 +65,7 @@ const SignupForm = () => {
           type="text"
           name="password"
           placeholder="Password..."
-          value={password}
-          onBlur={handleBlur}
-          onChange={handleChange}
+          {...getFieldProps('password')}
         />
         {errors.password && touched.password && <span className={`text-red-500 text-xs mt-1 ml-3`}>{errors.password}</span>}
       </fieldset>
