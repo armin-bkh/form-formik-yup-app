@@ -6,7 +6,7 @@ const initialValues = {
   email: "",
   phoneNumber: "",
   password: "",
-  passwordConfirmaion: '',
+  passwordConfirmation: '',
 };
 
 const onSubmit = (values) =>{
@@ -17,8 +17,11 @@ const validationSchema = Yup.object({
   name: Yup.string().required('name is required'),
   email: Yup.string().email('email format is invalid').required('email is required'),
   phoneNumber: Yup.string().required('phone number is required').matches(/^[0-9]{11}$/, 'phone number is invalid'),
-  password: Yup.string().required('password is required').min(5, 'password length must be bigger than 4'),
-  passwordConfirmaion: Yup.string().required('password confirmation is required').oneOf([Yup.ref('password'), null], 'password must match')
+  password: Yup.string().required('password is required').min(5, 'password length must be equal or bigger than 5').matches(
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])/,
+    "Must Contain One Uppercase, One Lowercase, One Number and One Special Case Character"
+  ),
+  passwordConfirmation: Yup.string().required('password confirmation is required').oneOf([Yup.ref('password'), null], 'password must match')
 })
 
 const SignupForm = () => {
@@ -91,11 +94,11 @@ const SignupForm = () => {
           className={`px-2 py-1 placeholder-gray-500 font-medium bg-transparent border-b-2
            border-blue-400 outline-none`}
           type="text"
-          name="passwordConfirmaion"
-          placeholder="Password..."
-          {...getFieldProps('passwordConfirmaion')}
+          name="passwordConfirmation"
+          placeholder="Password Confirmation..."
+          {...getFieldProps('passwordConfirmation')}
         />
-        {errors.passwordConfirmaion && touched.passwordConfirmaion && <span className={`text-red-500 text-xs mt-1 ml-3`}>{errors.passwordConfirmaion}</span>}
+        {errors.passwordConfirmation && touched.passwordConfirmation && <span className={`text-red-500 text-xs mt-1 ml-3`}>{errors.passwordConfirmation}</span>}
       </fieldset>
       <button
         className={`border border-blue-400 text-blue-400 font-bold tracking-wider outline-none py-2 w-full rounded-sm mt-7 hover:text-white hover:bg-blue-400 transition`}
