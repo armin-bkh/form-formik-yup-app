@@ -12,6 +12,11 @@ const initialValues = {
   passwordConfirmation: "",
 };
 
+const radios = [
+  { label: "Male", value: "0" },
+  { label: "Female", value: "1" },
+];
+
 const onSubmit = (values) => {
   console.log(values);
 };
@@ -51,6 +56,7 @@ const SignupForm = () => {
     onSubmit,
     validationSchema,
     validateOnMount: true,
+    enableReinitialize: true,
   });
 
   return (
@@ -89,28 +95,32 @@ const SignupForm = () => {
         touched={touched.phoneNumber}
       />
       <fieldset className={`mb-5 flex flex-col`}>
-        <label className={`mb-3 capitalize fieldValue font-bold tracking-wider text-gray-300`}>Gender:</label>
+        <label
+          className={`mb-3 capitalize fieldValue font-bold tracking-wider text-gray-300`}
+        >
+          Gender:
+        </label>
         <div className={`grid grid-cols-2 grid-rows-1 h-24 gap-x-5`}>
-          <RadioInputForm
-            value="male"
-            id="male"
-            name="gender"
-            formValue={values.gender}
-            onChange={handleChange}
-          />
-          <RadioInputForm
-            value="famale"
-            id="female"
-            name="gender"
-            formValue={values.gender}
-            onChange={handleChange}
-          />
+          {radios.map((radio) => (
+            <RadioInputForm
+              key={radio.value}
+              value={radio.value}
+              label={radio.label}
+              name="gender"
+              formValue={values.gender}
+              onChange={handleChange}
+            />
+          ))}
         </div>
-        {errors.gender && touched.gender && <span className={`text-red-500 text-sm mt-1 ml-3 title`}>{errors.gender}</span>}
+        {errors.gender && touched.gender && (
+          <span className={`text-red-500 text-sm mt-1 ml-3 title`}>
+            {errors.gender}
+          </span>
+        )}
       </fieldset>
       <TextInputForm
         {...getFieldProps("password")}
-        type="text"
+        type="password"
         name="password"
         placeholder="Password..."
         error={errors.password}
@@ -118,7 +128,7 @@ const SignupForm = () => {
       />
       <TextInputForm
         {...getFieldProps("passwordConfirmation")}
-        type="text"
+        type="password"
         name="passwordConfirmation"
         placeholder="Password Confirmation..."
         error={errors.passwordConfirmation}

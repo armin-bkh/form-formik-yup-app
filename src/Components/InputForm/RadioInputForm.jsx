@@ -1,23 +1,23 @@
 import { IoMale, IoFemale } from "react-icons/io5";
 
-const RadioInputForm = ({ name, id, value, formValue, onChange }) => {
+const RadioInputForm = ({ name, label,  value, formValue, onChange }) => {
   return (
     <label
       className={`bg-blue-400 transition-all flex flex-col md:flex-row justify-between items-center cursor-pointer backdrop-blur-md p-5 text-white rounded-md ${
         formValue === value ? "shadow-xl" : "opacity-50"
       }`}
-      htmlFor={id}
+      htmlFor={label}
     >
       <h4
         className={`capitalize header text-xl md:text-2xl flex flex-row items-center md:flex-col md:items-start`}
       >
-        <span className={`mr-2`}>{value}</span>
-        {value === "male" ? <IoMale /> : <IoFemale />}
+        <span className={`mr-2`}>{label}</span>
+        {value === "0" ? <IoMale /> : <IoFemale />}
       </h4>
       <input
         className={`sr-only`}
         type="radio"
-        id={id}
+        id={label}
         value={value}
         name={name}
         onChange={onChange}
