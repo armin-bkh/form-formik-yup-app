@@ -75,7 +75,7 @@ const SignupForm = () => {
 
   return (
     <form
-      className={`w-full md:max-w-lg rounded-md p-5 bg-pink-400 bg-opacity-30 backdrop-blur-md`}
+      className={`w-full md:max-w-lg rounded-md p-5 bg-pink-400 bg-opacity-30 backdrop-filter backdrop-blur-md`}
       onSubmit={handleSubmit}
     >
       <h1
