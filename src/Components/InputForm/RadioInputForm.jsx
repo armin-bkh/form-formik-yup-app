@@ -8,6 +8,7 @@ const RadioInputForm = ({
   options,
   error,
   touched,
+  onBlur
 }) => {
   return (
     <fieldset className={`grid grid-cols-2 gap-x-3 mb-5`}>
@@ -37,6 +38,7 @@ const RadioInputForm = ({
             value={op.value}
             name={name}
             onChange={onChange}
+            onBlur={onBlur}
             checked={formValue === op.value}
           />
           <div

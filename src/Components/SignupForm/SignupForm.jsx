@@ -20,11 +20,11 @@ const radios = [
 ];
 
 const selects = [
-  {label: 'Select...', value: ''},
-  {label: 'Friends', value: 'friends'},
-  {label: 'Google', value: 'google'},
-  {label: 'Social network', value: 'network'},
-  {label: 'Another ways', value: 'another'},
+  { label: "Select...", value: "" },
+  { label: "Friends", value: "friends" },
+  { label: "Google", value: "google" },
+  { label: "Social network", value: "network" },
+  { label: "Another ways", value: "another" },
 ];
 
 const onSubmit = (values) => {
@@ -40,7 +40,7 @@ const validationSchema = Yup.object({
     .required("phone number is required")
     .matches(/^[0-9]{11}$/, "phone number is invalid"),
   gender: Yup.string().required("choose your gender is required"),
-  introduction: Yup.string().required('introduction is required'),
+  introduction: Yup.string().required("introduction is required"),
   password: Yup.string()
     .required("password is required")
     .min(5, "password length must be equal or bigger than 5")
@@ -61,6 +61,9 @@ const SignupForm = () => {
     getFieldProps,
     isValid,
     handleChange,
+    setFieldValue,
+    setFieldTouched,
+    handleBlur,
     values,
   } = useFormik({
     initialValues,
@@ -105,10 +108,21 @@ const SignupForm = () => {
         error={errors.phoneNumber}
         touched={touched.phoneNumber}
       />
-      <SelectBoxForm options={selects} name="introduction" {...getFieldProps('introduction')} error={errors.introduction} touched={touched.introduction} />
+      <SelectBoxForm
+        value={{ label: values.introduction }}
+        options={selects}
+        name="introduction"
+        onChange={(opt, e) => {
+          setFieldValue("introduction", opt.value);
+        }}
+        onBlur={() => setFieldTouched("introduction", true)}
+        error={errors.introduction}
+        touched={touched.introduction}
+      />
       <RadioInputForm
         options={radios}
         onChange={handleChange}
+        onBlur={handleBlur}
         name="gender"
         formValue={values.gender}
         error={errors.gender}
