@@ -1,11 +1,13 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import InputForm from "../InputForm/InputForm";
+import RadioInputForm from "../InputForm/RadioInputForm";
+import TextInputForm from "../InputForm/TextInputForm";
 
 const initialValues = {
   name: "",
   email: "",
   phoneNumber: "",
+  gender: "",
   password: "",
   passwordConfirmation: "",
 };
@@ -22,6 +24,7 @@ const validationSchema = Yup.object({
   phoneNumber: Yup.string()
     .required("phone number is required")
     .matches(/^[0-9]{11}$/, "phone number is invalid"),
+  gender: Yup.string().required("choose your gender is required"),
   password: Yup.string()
     .required("password is required")
     .min(5, "password length must be equal or bigger than 5")
@@ -35,7 +38,15 @@ const validationSchema = Yup.object({
 });
 
 const SignupForm = () => {
-  const { handleSubmit, errors, touched, getFieldProps, isValid } = useFormik({
+  const {
+    handleSubmit,
+    errors,
+    touched,
+    getFieldProps,
+    isValid,
+    handleChange,
+    values,
+  } = useFormik({
     initialValues,
     onSubmit,
     validationSchema,
@@ -51,8 +62,9 @@ const SignupForm = () => {
         className={`text-blue-400 text-2xl font-bold md:text-6xl mb-10 ml-3 tracking-wider header`}
       >
         Sign up
-      </h1><fieldset disabled="disabled"></fieldset>
-      <InputForm
+      </h1>
+      <fieldset disabled="disabled"></fieldset>
+      <TextInputForm
         {...getFieldProps("name")}
         type="text"
         name="name"
@@ -60,7 +72,7 @@ const SignupForm = () => {
         error={errors.name}
         touched={touched.name}
       />
-      <InputForm
+      <TextInputForm
         {...getFieldProps("email")}
         type="email"
         name="email"
@@ -68,7 +80,7 @@ const SignupForm = () => {
         error={errors.email}
         touched={touched.email}
       />
-      <InputForm
+      <TextInputForm
         {...getFieldProps("phoneNumber")}
         type="text"
         name="phoneNumber"
@@ -76,7 +88,27 @@ const SignupForm = () => {
         error={errors.phoneNumber}
         touched={touched.phoneNumber}
       />
-      <InputForm
+      <fieldset className={`mb-5 flex flex-col`}>
+        <label className={`mb-3 capitalize fieldValue font-bold tracking-wider text-gray-300`}>Gender:</label>
+        <div className={`grid grid-cols-2 grid-rows-1 h-24 gap-x-5`}>
+          <RadioInputForm
+            value="male"
+            id="male"
+            name="gender"
+            formValue={values.gender}
+            onChange={handleChange}
+          />
+          <RadioInputForm
+            value="famale"
+            id="female"
+            name="gender"
+            formValue={values.gender}
+            onChange={handleChange}
+          />
+        </div>
+        {errors.gender && touched.gender && <span className={`text-red-500 text-sm mt-1 ml-3 title`}>{errors.gender}</span>}
+      </fieldset>
+      <TextInputForm
         {...getFieldProps("password")}
         type="text"
         name="password"
@@ -84,7 +116,7 @@ const SignupForm = () => {
         error={errors.password}
         touched={touched.password}
       />
-      <InputForm
+      <TextInputForm
         {...getFieldProps("passwordConfirmation")}
         type="text"
         name="passwordConfirmation"

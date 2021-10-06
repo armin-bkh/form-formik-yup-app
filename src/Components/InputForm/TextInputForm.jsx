@@ -1,4 +1,4 @@
-const InputForm = ({ type, name, error, touched, ...rest }) => {
+const TextInputForm = ({ type, name, error, touched, ...rest }) => {
     return ( 
         <fieldset className={`flex flex-col mb-5 text-gray-300`}>
         <label className={`mb-3 capitalize fieldValue font-bold tracking-wider`}>{name}:</label>
@@ -14,4 +14,4 @@ const InputForm = ({ type, name, error, touched, ...rest }) => {
      );
 }
  
-export default InputForm;
+export default TextInputForm;
