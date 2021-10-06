@@ -1,0 +1,30 @@
+$header: 'Righteous';
+$title: 'ConcertOne';
+$fieldValue: 'Asap';
+
+@font-face {
+    font-family: 'Righteous';
+    src: url('../Fonts/Righteous-Regular.ttf');
+}
+.header{
+    font-family: $header;
+}
+
+@font-face {
+    font-family: 'ConcertOne';
+    src: url('../Fonts/ConcertOne-Regular.ttf');
+}
+
+.title{
+    font-family: $title;
+    letter-spacing: 2px;
+}
+
+@font-face {
+    font-family: 'Asap';
+    src: url('../Fonts/AsapCondensed-Regular.ttf');
+}
+
+.fieldValue{
+    font-family: $fieldValue;
+}
