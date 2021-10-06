@@ -1,0 +1,16 @@
+.labelChecked{
+    position: relative;
+    box-shadow: 0 0 15px rgba(143, 143, 143, 0.897);
+
+    &::after{
+        content: '';
+        width: 5px;
+        height: 90%;
+        margin: 5px;
+        top: 0;
+        left: 0;
+        position: absolute;
+        background: #fff;
+        border-radius: 10px;
+    }
+}

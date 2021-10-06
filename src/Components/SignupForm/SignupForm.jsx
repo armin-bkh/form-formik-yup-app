@@ -94,30 +94,14 @@ const SignupForm = () => {
         error={errors.phoneNumber}
         touched={touched.phoneNumber}
       />
-      <fieldset className={`mb-5 flex flex-col`}>
-        <label
-          className={`mb-3 capitalize fieldValue font-bold tracking-wider text-gray-300`}
-        >
-          Gender:
-        </label>
-        <div className={`grid grid-cols-2 grid-rows-1 h-24 gap-x-5`}>
-          {radios.map((radio) => (
-            <RadioInputForm
-              key={radio.value}
-              value={radio.value}
-              label={radio.label}
-              name="gender"
-              formValue={values.gender}
-              onChange={handleChange}
-            />
-          ))}
-        </div>
-        {errors.gender && touched.gender && (
-          <span className={`text-red-500 text-sm mt-1 ml-3 title`}>
-            {errors.gender}
-          </span>
-        )}
-      </fieldset>
+          <RadioInputForm
+            options={radios}
+            onChange={handleChange}
+            name="gender"
+            formValue={values.gender}
+            error={errors.gender}
+            touched={touched.gender}
+          />
       <TextInputForm
         {...getFieldProps("password")}
         type="password"
