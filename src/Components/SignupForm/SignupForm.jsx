@@ -21,10 +21,10 @@ const radios = [
 
 const selects = [
   { label: "Select...", value: "" },
-  { label: "Friends", value: "friends" },
-  { label: "Google", value: "google" },
-  { label: "Social network", value: "network" },
-  { label: "Another ways", value: "another" },
+  { label: "Friends", value: "Friends" },
+  { label: "Google", value: "Google" },
+  { label: "Social network", value: "Social network" },
+  { label: "Another ways", value: "Another ways" },
 ];
 
 const onSubmit = (values) => {
@@ -109,7 +109,7 @@ const SignupForm = () => {
         touched={touched.phoneNumber}
       />
       <SelectBoxForm
-        value={{ label: values.introduction }}
+        value={{ value: values.introduction,  label: values.introduction || "select..." }}
         options={selects}
         name="introduction"
         onChange={(opt, e) => {

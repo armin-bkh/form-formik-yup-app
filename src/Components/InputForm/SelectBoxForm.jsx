@@ -1,6 +1,24 @@
 import Select from "react-select";
 
 const SelectBoxForm = ({name, value, options ,error, touched, onChange, onBlur}) => {
+
+    const colourStyles = {
+        singleValue: (provided) => ({
+            ...provided,
+            color: '#fff'
+        }),
+        control: (styles, isFocused) => ({ ...styles, backgroundColor: '#60A5FA', fontFamily: 'fieldValue', border: isFocused ? 'none' : 'none', outline: isFocused ? 'none' : 'none',}),
+        option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+          return {
+            ...styles,
+            backgroundColor: isSelected && '#60A5FA',
+            color: isSelected ? '#D1D5DB' : "#60A5FA",
+            cursor: isSelected ? 'not-allowed' : 'pointer',
+            fontFamily: 'fieldValue',
+          };
+        },
+      };
+
     return ( 
         <fieldset className={`mb-5 flex flex-col text-gray-300`}>
             <label className={`mb-3 capitalize fieldValue font-bold tracking-wider`}>How to get know us?</label>
@@ -11,7 +29,7 @@ const SelectBoxForm = ({name, value, options ,error, touched, onChange, onBlur})
                 ))
             }
             </select> */}
-            <Select options={options} name={name} value={value} onChange={(opt, e) => onChange(opt, e)} onBlur={onBlur}/>
+            <Select className={`placeholder-gray-300`} placeholder="select..." styles={colourStyles} options={options} name={name} value={value} onChange={(opt, e) => onChange(opt, e)} onBlur={onBlur}/>
         {error && touched && <span className={`text-red-500 text-sm mt-1 ml-3 title`}>{error}</span>}
         </fieldset>
      );
