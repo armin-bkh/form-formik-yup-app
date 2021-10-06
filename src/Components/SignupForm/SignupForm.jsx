@@ -1,12 +1,14 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import RadioInputForm from "../InputForm/RadioInputForm";
+import SelectBoxForm from "../InputForm/SelectBoxForm";
 import TextInputForm from "../InputForm/TextInputForm";
 
 const initialValues = {
   name: "",
   email: "",
   phoneNumber: "",
+  introduction: "",
   gender: "",
   password: "",
   passwordConfirmation: "",
@@ -15,6 +17,14 @@ const initialValues = {
 const radios = [
   { label: "Male", value: "0" },
   { label: "Female", value: "1" },
+];
+
+const selects = [
+  {label: 'Select...', value: ''},
+  {label: 'Friends', value: 'friends'},
+  {label: 'Google', value: 'google'},
+  {label: 'Social network', value: 'network'},
+  {label: 'Another ways', value: 'another'},
 ];
 
 const onSubmit = (values) => {
@@ -30,6 +40,7 @@ const validationSchema = Yup.object({
     .required("phone number is required")
     .matches(/^[0-9]{11}$/, "phone number is invalid"),
   gender: Yup.string().required("choose your gender is required"),
+  introduction: Yup.string().required('introduction is required'),
   password: Yup.string()
     .required("password is required")
     .min(5, "password length must be equal or bigger than 5")
@@ -94,14 +105,15 @@ const SignupForm = () => {
         error={errors.phoneNumber}
         touched={touched.phoneNumber}
       />
-          <RadioInputForm
-            options={radios}
-            onChange={handleChange}
-            name="gender"
-            formValue={values.gender}
-            error={errors.gender}
-            touched={touched.gender}
-          />
+      <SelectBoxForm options={selects} name="introduction" {...getFieldProps('introduction')} error={errors.introduction} touched={touched.introduction} />
+      <RadioInputForm
+        options={radios}
+        onChange={handleChange}
+        name="gender"
+        formValue={values.gender}
+        error={errors.gender}
+        touched={touched.gender}
+      />
       <TextInputForm
         {...getFieldProps("password")}
         type="password"
