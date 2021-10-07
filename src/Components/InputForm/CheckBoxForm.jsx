@@ -1,13 +1,12 @@
 import styles from "./CheckBoxForm.module.scss";
 
 const CheckBoxForm = ({ name, options, onChange, values, onBlur }) => {
-  console.log(values.length)
   return (
     <fieldset className={`flex flex-col mb-5`}>
       <label
         className={`mb-3 text-sm md:text-base capitalize fieldValue font-bold tracking-wider text-gray-300`}
       >
-        your knowledge: <span className={`text-gray-500`}>(optional)</span>
+        your Skills: <span className={`text-gray-500`}>(optional)</span>
       </label>
       <div className={`grid w-full grid-cols-3 md:grid-cols-6 gap-y-2 gap-x-2 mb-7`}>
         {options.map((op) => (
@@ -34,9 +33,9 @@ const CheckBoxForm = ({ name, options, onChange, values, onBlur }) => {
       </div>
       <div className={`w-full h-2 bg-blue-400 bg-opacity-30 rounded-full`}>
         <div
-          className={`${
+          className={`${values.length ? `w-${values.length.toString()}/6` : "w-0"}  ${
             values.length > 5 && "rounded-r-md w-full"
-          } transition-all ease-in h-full rounded-l-md ${values.length ? `w-${values.length.toString()}/6` : "w-0"}  bg-blue-400 ${
+          } transition-all ease-in h-full rounded-l-md bg-blue-400 ${
             styles.labelChecked
           }`}
         ></div>

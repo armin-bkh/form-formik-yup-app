@@ -14,7 +14,7 @@ const initialValues = {
   gender: "",
   password: "",
   passwordConfirmation: "",
-  knowledge: [],
+  Skills: [],
   terms: false,
 };
 
@@ -54,7 +54,7 @@ const validationSchema = Yup.object({
     .matches(/^[0-9]{11}$/, "phone number is invalid"),
   gender: Yup.string().required("choose your gender is required"),
   introduction: Yup.string().required("introduction is required"),
-  knowledge: Yup.array().notRequired(),
+  Skills: Yup.array().notRequired(),
   password: Yup.string()
     .required("password is required")
     .min(5, "password length must be equal or bigger than 5")
@@ -149,11 +149,11 @@ const SignupForm = () => {
         touched={touched.gender}
       />
       <CheckBoxForm
-        name="knowledge"
+        name="Skills"
         options={checks}
         onChange={handleChange}
         onBlur={handleBlur}
-        values={values.knowledge}
+        values={values.Skills}
       />
       <TextInputForm
         {...getFieldProps("password")}
