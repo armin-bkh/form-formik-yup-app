@@ -1,6 +1,7 @@
 import styles from "./CheckBoxForm.module.scss";
 
 const CheckBoxForm = ({ name, options, onChange, values, onBlur }) => {
+  console.log(values.length)
   return (
     <fieldset className={`flex flex-col mb-5`}>
       <label
@@ -35,7 +36,7 @@ const CheckBoxForm = ({ name, options, onChange, values, onBlur }) => {
         <div
           className={`${values.length !== 0 ? `w-${values.length}/6` : "w-0"} ${
             values.length > 5 && "rounded-r-md"
-          } transition-all ease-in h-full rounded-l-md bg-blue-400 ${
+          } transition-all ease-in h-full rounded-l-md bg-yellow-400 ${
             styles.labelChecked
           }`}
         ></div>
