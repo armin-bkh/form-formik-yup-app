@@ -4,7 +4,7 @@ import CheckBoxForm from "../InputForm/CheckBoxForm";
 import RadioInputForm from "../InputForm/RadioInputForm";
 import SelectBoxForm from "../InputForm/SelectBoxForm";
 import TextInputForm from "../InputForm/TextInputForm";
-import { BiCheck } from "react-icons/bi";
+import SingleCheckBoxForm from "../InputForm/SingleCheckBoxForm";
 
 const initialValues = {
   name: "",
@@ -171,25 +171,13 @@ const SignupForm = () => {
         error={errors.passwordConfirmation}
         touched={touched.passwordConfirmation}
       />
-      <fieldset className={`mb-5 text-gray-300`}>
-        <input
-          className={`sr-only`}
-          type="checkbox"
-          id="terms"
-          name="terms"
-          value={true}
-          {...getFieldProps("terms")}
-        />
-        <label className={`fieldValue flex items-center`} htmlFor="terms">
-          <span
-            className={`mr-3 rounded-sm border-2 border-blue-400 w-6 h-6 flex items-center justify-center text-xl text-blue-400 cursor-pointer`}
-          >
-            {values.terms && <BiCheck />}
-          </span>
-          Accept all terms and conditions
-        </label>
-        {errors.terms && touched.terms && <span className={`text-red-500 text-sm mt-1 ml-3 title`}>{errors.terms}</span>}
-      </fieldset>
+      <SingleCheckBoxForm
+        error={errors.terms}
+        touched={touched.terms}
+        formValue={values.terms}
+        name="terms"
+        {...getFieldProps("terms")}
+      />
       <button
         className={`header border border-blue-400 text-blue-400 font-bold tracking-widest outline-none py-2
          w-full rounded-sm mt-7 ${

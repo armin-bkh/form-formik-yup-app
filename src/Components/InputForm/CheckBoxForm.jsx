@@ -1,4 +1,4 @@
-import styles from './CheckBoxForm.module.scss';
+import styles from "./CheckBoxForm.module.scss";
 
 const CheckBoxForm = ({ name, options, onChange, values, onBlur }) => {
   return (
@@ -31,13 +31,13 @@ const CheckBoxForm = ({ name, options, onChange, values, onBlur }) => {
           </label>
         ))}
       </div>
-      <div
-        className={`w-full h-2 bg-blue-400 bg-opacity-30 rounded-full`}
-      >
+      <div className={`w-full h-2 bg-blue-400 bg-opacity-30 rounded-full`}>
         <div
-          className={`${
-            values.length !== 0 ? `w-${values.length}/6` : "w-0"
-          } ${values.length > 5 && 'rounded-r-md'} transition-all ease-in h-full rounded-l-md bg-blue-400 ${styles.labelChecked}`}
+          className={`${values.length !== 0 ? `w-${values.length}/6` : "w-0"} ${
+            values.length > 5 && "rounded-r-md"
+          } transition-all ease-in h-full rounded-l-md bg-blue-400 ${
+            styles.labelChecked
+          }`}
         ></div>
       </div>
     </fieldset>
