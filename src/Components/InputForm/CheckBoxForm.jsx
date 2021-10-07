@@ -8,7 +8,7 @@ const CheckBoxForm = ({ name, options, onChange, values, onBlur }) => {
       >
         your knowledge: <span className={`text-gray-500`}>(optional)</span>
       </label>
-      <div className={`flex w-full justify-between items-center mb-3`}>
+      <div className={`flex w-full justify-between items-center mb-7`}>
         {options.map((op) => (
           <label
             className={`px-3 py-1 transition rounded-md flex-grow-1 header text-sm md:text-base cursor-pointer ${
@@ -32,12 +32,12 @@ const CheckBoxForm = ({ name, options, onChange, values, onBlur }) => {
         ))}
       </div>
       <div
-        className={`w-full h-2 bg-blue-400 bg-opacity-30 rounded-full overflow-hidden`}
+        className={`w-full h-2 bg-blue-400 bg-opacity-30 rounded-full`}
       >
         <div
           className={`${
             values.length !== 0 ? `w-${values.length}/6` : "w-0"
-          } transition-all ease-in duration-300 h-full bg-blue-400`}
+          } ${values.length > 5 && 'rounded-r-md'} transition-all ease-in h-full rounded-l-md bg-blue-400 ${styles.labelChecked}`}
         ></div>
       </div>
     </fieldset>
