@@ -4,6 +4,7 @@ import CheckBoxForm from "../InputForm/CheckBoxForm";
 import RadioInputForm from "../InputForm/RadioInputForm";
 import SelectBoxForm from "../InputForm/SelectBoxForm";
 import TextInputForm from "../InputForm/TextInputForm";
+import { BiCheck } from "react-icons/bi";
 
 const initialValues = {
   name: "",
@@ -14,6 +15,7 @@ const initialValues = {
   password: "",
   passwordConfirmation: "",
   knowledge: [],
+  terms: false,
 };
 
 const radios = [
@@ -22,13 +24,13 @@ const radios = [
 ];
 
 const checks = [
-  {label: 'HTML', value: 'html'},
-  {label: 'CSS', value: 'css'},
-  {label: 'javascript', value: 'js'},
-  {label: 'jQuery', value: 'jquery'},
-  {label: 'React.js', value: 'react'},
-  {label: 'Redux', value: 'redux'},
-]
+  { label: "HTML", value: "html" },
+  { label: "CSS", value: "css" },
+  { label: "javascript", value: "js" },
+  { label: "jQuery", value: "jquery" },
+  { label: "React.js", value: "react" },
+  { label: "Redux", value: "redux" },
+];
 
 const selects = [
   { label: "Select...", value: "" },
@@ -63,6 +65,9 @@ const validationSchema = Yup.object({
   passwordConfirmation: Yup.string()
     .required("password confirmation is required")
     .oneOf([Yup.ref("password"), null], "password must match"),
+  terms: Yup.boolean()
+    .required()
+    .oneOf([true], "You must accept the terms and conditions"),
 });
 
 const SignupForm = () => {
@@ -121,7 +126,10 @@ const SignupForm = () => {
         touched={touched.phoneNumber}
       />
       <SelectBoxForm
-        value={{ value: values.introduction,  label: values.introduction || "select..." }}
+        value={{
+          value: values.introduction,
+          label: values.introduction || "select...",
+        }}
         options={selects}
         name="introduction"
         onChange={(opt, e) => {
@@ -141,11 +149,11 @@ const SignupForm = () => {
         touched={touched.gender}
       />
       <CheckBoxForm
-      name="knowledge"
-      options={checks}
-      onChange={handleChange}
-      onBlur={handleBlur}
-      values={values.knowledge}
+        name="knowledge"
+        options={checks}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        values={values.knowledge}
       />
       <TextInputForm
         {...getFieldProps("password")}
@@ -163,6 +171,25 @@ const SignupForm = () => {
         error={errors.passwordConfirmation}
         touched={touched.passwordConfirmation}
       />
+      <fieldset className={`mb-5 text-gray-300`}>
+        <input
+          className={`sr-only`}
+          type="checkbox"
+          id="terms"
+          name="terms"
+          value={true}
+          {...getFieldProps("terms")}
+        />
+        <label className={`fieldValue flex items-center`} htmlFor="terms">
+          <span
+            className={`mr-3 rounded-sm border-2 border-blue-400 w-6 h-6 flex items-center justify-center text-xl text-blue-400 cursor-pointer`}
+          >
+            {values.terms && <BiCheck />}
+          </span>
+          Accept all terms and conditions
+        </label>
+        {errors.terms && touched.terms && <span className={`text-red-500 text-sm mt-1 ml-3 title`}>{errors.terms}</span>}
+      </fieldset>
       <button
         className={`header border border-blue-400 text-blue-400 font-bold tracking-widest outline-none py-2
          w-full rounded-sm mt-7 ${
