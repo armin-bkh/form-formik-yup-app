@@ -1,5 +1,6 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import CheckBoxForm from "../InputForm/CheckBoxForm";
 import RadioInputForm from "../InputForm/RadioInputForm";
 import SelectBoxForm from "../InputForm/SelectBoxForm";
 import TextInputForm from "../InputForm/TextInputForm";
@@ -12,12 +13,22 @@ const initialValues = {
   gender: "",
   password: "",
   passwordConfirmation: "",
+  knowledge: [],
 };
 
 const radios = [
   { label: "Male", value: "0" },
   { label: "Female", value: "1" },
 ];
+
+const checks = [
+  {label: 'HTML', value: 'html'},
+  {label: 'CSS', value: 'css'},
+  {label: 'javascript', value: 'js'},
+  {label: 'jQuery', value: 'jquery'},
+  {label: 'React.js', value: 'react'},
+  {label: 'Redux', value: 'redux'},
+]
 
 const selects = [
   { label: "Select...", value: "" },
@@ -41,6 +52,7 @@ const validationSchema = Yup.object({
     .matches(/^[0-9]{11}$/, "phone number is invalid"),
   gender: Yup.string().required("choose your gender is required"),
   introduction: Yup.string().required("introduction is required"),
+  knowledge: Yup.array().notRequired(),
   password: Yup.string()
     .required("password is required")
     .min(5, "password length must be equal or bigger than 5")
@@ -83,7 +95,7 @@ const SignupForm = () => {
       >
         Sign up
       </h1>
-      <fieldset disabled="disabled"></fieldset>
+
       <TextInputForm
         {...getFieldProps("name")}
         type="text"
@@ -127,6 +139,13 @@ const SignupForm = () => {
         formValue={values.gender}
         error={errors.gender}
         touched={touched.gender}
+      />
+      <CheckBoxForm
+      name="knowledge"
+      options={checks}
+      onChange={handleChange}
+      onBlur={handleBlur}
+      values={values.knowledge}
       />
       <TextInputForm
         {...getFieldProps("password")}
