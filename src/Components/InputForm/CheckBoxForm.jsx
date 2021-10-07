@@ -8,10 +8,10 @@ const CheckBoxForm = ({ name, options, onChange, values, onBlur }) => {
       >
         your knowledge: <span className={`text-gray-500`}>(optional)</span>
       </label>
-      <div className={`flex w-full justify-between items-center mb-7`}>
+      <div className={`grid w-full grid-cols-3 md:grid-cols-6 gap-y-2 gap-x-2 mb-7`}>
         {options.map((op) => (
           <label
-            className={`px-3 py-1 transition rounded-md flex-grow-1 header text-sm md:text-base cursor-pointer ${
+            className={`px-2 py-2 flex justify-center items-center transition rounded-md text-xs header cursor-pointer ${
               values.includes(op.value) ? styles.labelChecked : "opacity-50"
             } bg-blue-400 text-gray-300`}
             htmlFor={op.value}
