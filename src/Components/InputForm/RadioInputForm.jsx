@@ -13,20 +13,20 @@ const RadioInputForm = ({
   return (
     <fieldset className={`grid grid-cols-2 gap-x-3 mb-5`}>
       <label
-        className={`mb-3 capitalize fieldValue font-bold tracking-wider text-gray-300 col-span-2`}
+        className={`mb-3 text-sm md:text-base capitalize fieldValue font-bold tracking-wider text-gray-300 col-span-2`}
       >
         Gender:
       </label>
       {options.map((op) => (
         <label
           key={op.value}
-          className={`bg-blue-400 transition-all flex backdrop-filterflex-col md:flex-row justify-between items-center cursor-pointer backdrop-blur-md p-5 text-white rounded-md ${
+          className={`bg-blue-400 transition-all flex flex-col md:flex-row justify-between items-center cursor-pointer p-5 text-white rounded-md ${
             formValue === op.value ? styles.labelChecked : "opacity-50"
           }`}
           htmlFor={op.label}
         >
           <h4
-            className={`capitalize header text-xl md:text-2xl flex flex-row items-center md:flex-col md:items-start mb-3 md:mb-0`}
+            className={`capitalize header text-lg md:text-2xl flex flex-row items-center md:flex-col md:items-start mb-3 md:mb-0`}
           >
             <span className={`mr-2`}>{op.label}</span>
             {op.value === "0" ? <IoMale /> : <IoFemale />}

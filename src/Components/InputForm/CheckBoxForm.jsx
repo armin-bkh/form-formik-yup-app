@@ -4,7 +4,7 @@ const CheckBoxForm = ({ name, options, onChange, values, onBlur }) => {
   return (
     <fieldset className={`flex flex-col mb-5`}>
       <label
-        className={`mb-3 capitalize fieldValue font-bold tracking-wider text-gray-300`}
+        className={`mb-3 text-sm md:text-base capitalize fieldValue font-bold tracking-wider text-gray-300`}
       >
         your knowledge: <span className={`text-gray-500`}>(optional)</span>
       </label>

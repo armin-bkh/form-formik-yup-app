@@ -96,7 +96,7 @@ const SignupForm = () => {
       onSubmit={handleSubmit}
     >
       <h1
-        className={`text-blue-400 text-2xl font-bold md:text-6xl mb-10 ml-3 tracking-wider header`}
+        className={`text-blue-400 text-4xl font-bold md:text-6xl mb-10 ml-3 tracking-wider header`}
       >
         Sign up
       </h1>
@@ -179,7 +179,7 @@ const SignupForm = () => {
         {...getFieldProps("terms")}
       />
       <button
-        className={`header border border-blue-400 text-blue-400 font-bold tracking-widest outline-none py-2
+        className={`header border text-sm md:text-base border-blue-400 text-blue-400 font-bold tracking-widest outline-none py-2
          w-full rounded-sm mt-7 ${
            isValid ? "hover:text-white hover:bg-blue-400" : "cursor-not-allowed"
          } transition disabled:text-blue-400 disabled:bg-transparent disabled:opacity-30`}
