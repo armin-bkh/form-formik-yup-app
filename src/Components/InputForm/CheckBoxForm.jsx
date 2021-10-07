@@ -35,7 +35,7 @@ const CheckBoxForm = ({ name, options, onChange, values, onBlur }) => {
       <div className={`w-full h-2 bg-blue-400 bg-opacity-30 rounded-full`}>
         <div
           className={`${
-            values.length > 5 && "rounded-r-md"
+            values.length > 5 && "rounded-r-md w-full"
           } transition-all ease-in h-full rounded-l-md ${values.length ? `w-${values.length.toString()}/6` : "w-0"}  bg-blue-400 ${
             styles.labelChecked
           }`}
