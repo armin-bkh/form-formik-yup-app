@@ -1,14 +1,18 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styles from "./CheckBoxForm.module.scss";
 
 const CheckBoxForm = ({ name, options, onChange, values, onBlur }) => {
-  let width = 'w-0';
-  if(values.length === 6){
-    width = 'w-full'
-  }
-  if(values.length > 0 && values.length < 6){
-    width = `w-${values.length}/6`
-  }
+  const [width, setWidth] = useState("w-0");
+  useEffect(() => {
+    if (values.length === 6) setWidth("w-full");
+    if (values.length === 5) setWidth("w-5/6");
+    if (values.length === 4) setWidth("w-4/6");
+    if (values.length === 3) setWidth("w-3/6");
+    if (values.length === 2) setWidth("w-2/6");
+    if (values.length === 1) setWidth("w-1/6");
+    if(!values.length) setWidth("w-0");
+  }, [values]);
+
   return (
     <fieldset className={`flex flex-col mb-5`}>
       <label
@@ -16,7 +20,9 @@ const CheckBoxForm = ({ name, options, onChange, values, onBlur }) => {
       >
         your Skills: <span className={`text-gray-500`}>(optional)</span>
       </label>
-      <div className={`grid w-full grid-cols-3 md:grid-cols-6 gap-y-2 gap-x-2 mb-7`}>
+      <div
+        className={`grid w-full grid-cols-3 md:grid-cols-6 gap-y-2 gap-x-2 mb-7`}
+      >
         {options.map((op) => (
           <label
             className={`px-2 py-2 flex justify-center items-center transition rounded-md text-xs header cursor-pointer ${
