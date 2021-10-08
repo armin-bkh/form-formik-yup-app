@@ -1,6 +1,14 @@
+import { useEffect } from "react";
 import styles from "./CheckBoxForm.module.scss";
 
 const CheckBoxForm = ({ name, options, onChange, values, onBlur }) => {
+  let width = 'w-0';
+  if(values.length === 6){
+    width = 'w-full'
+  }
+  if(values.length > 0 && values.length < 6){
+    width = `w-${values.length}/6`
+  }
   return (
     <fieldset className={`flex flex-col mb-5`}>
       <label
@@ -33,9 +41,9 @@ const CheckBoxForm = ({ name, options, onChange, values, onBlur }) => {
       </div>
       <div className={`w-full h-2 bg-blue-400 bg-opacity-30 rounded-full`}>
         <div
-          className={`${values.length ? `w-${values.length.toString()}/6` : "w-0"}  ${
-            values.length > 5 && "rounded-r-md w-full"
-          } transition-all ease-in h-full rounded-l-md bg-blue-400 ${
+          className={`${width} ${
+            values.length > 5 && "rounded-r-md"
+          } w-0 transition-all ease-in h-full rounded-l-md bg-blue-400 ${
             styles.labelChecked
           }`}
         ></div>

@@ -90,6 +90,9 @@ const SignupForm = () => {
     enableReinitialize: true,
   });
 
+  console.log(values)
+  console.log(errors)
+
   return (
     <form
       className={`w-full md:max-w-lg rounded-md p-5 bg-pink-400 bg-opacity-30 backdrop-filter backdrop-blur-md`}
@@ -132,9 +135,7 @@ const SignupForm = () => {
         }}
         options={selects}
         name="introduction"
-        onChange={(opt, e) => {
-          setFieldValue("introduction", opt.value);
-        }}
+        onChange={(opt, e) => setFieldValue("introduction", opt.value)}
         onBlur={() => setFieldTouched("introduction", true)}
         error={errors.introduction}
         touched={touched.introduction}
