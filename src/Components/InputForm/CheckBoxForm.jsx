@@ -6,9 +6,11 @@ const CheckBoxForm = ({ name, options, onChange, values, onBlur }) => {
   
   useEffect(() => {
     if (values.length === 6) setWidth("w-full");
-    if(values.length > 0 && values.length < 6){
-      setWidth(`w-${values.length}/6`)
-    }
+    if (values.length === 5) setWidth("w-5/6");
+    if (values.length === 4) setWidth("w-4/6");
+    if (values.length === 3) setWidth("w-3/6");
+    if (values.length === 2) setWidth("w-2/6");
+    if (values.length === 1) setWidth("w-1/6");
     if(!values.length) setWidth("w-0");
   }, [values]);
 
