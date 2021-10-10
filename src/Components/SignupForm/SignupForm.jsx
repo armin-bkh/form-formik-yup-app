@@ -5,6 +5,7 @@ import RadioInputForm from "../InputForm/RadioInputForm";
 import SelectBoxForm from "../InputForm/SelectBoxForm";
 import TextInputForm from "../InputForm/TextInputForm";
 import SingleCheckBoxForm from "../InputForm/SingleCheckBoxForm";
+import { useEffect } from "react";
 
 const initialValues = {
   name: "",
@@ -33,7 +34,6 @@ const checks = [
 ];
 
 const selects = [
-  { label: "Select...", value: "" },
   { label: "Friends", value: "Friends" },
   { label: "Google", value: "Google" },
   { label: "Social network", value: "Social network" },
@@ -90,8 +90,11 @@ const SignupForm = () => {
     enableReinitialize: true,
   });
 
-  console.log(values)
-  console.log(errors)
+  useEffect(()=>{
+    if(values.introduction){
+      setFieldTouched('introduction', false)
+    }
+  }, [values])
 
   return (
     <form
@@ -129,16 +132,13 @@ const SignupForm = () => {
         touched={touched.phoneNumber}
       />
       <SelectBoxForm
-        value={{
-          value: values.introduction,
-          label: values.introduction || "select...",
-        }}
+        value={values.introduction}
         options={selects}
         name="introduction"
-        onChange={(opt, e) => setFieldValue("introduction", opt.value)}
-        onBlur={() => setFieldTouched("introduction", true)}
+        onChange={(opt) => setFieldValue("introduction", opt.value)}
         error={errors.introduction}
         touched={touched.introduction}
+        onBlur={() => setFieldTouched("introduction", true)}
       />
       <RadioInputForm
         options={radios}
