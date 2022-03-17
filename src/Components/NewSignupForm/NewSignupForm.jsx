@@ -1,4 +1,4 @@
-import { Formik, Form } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import CheckBoxForm from "../InputForm/CheckBoxForm";
 import RadioInputForm from "../InputForm/RadioInputForm";
@@ -10,35 +10,9 @@ import { useEffect } from "react";
 const initialValues = {
   name: "",
   email: "",
-  phoneNumber: "",
-  introduction: "",
-  gender: "",
   password: "",
   passwordConfirmation: "",
-  Skills: [],
-  terms: false,
 };
-
-const radios = [
-  { label: "Male", value: "0" },
-  { label: "Female", value: "1" },
-];
-
-const checks = [
-  { label: "HTML", value: "html" },
-  { label: "CSS", value: "css" },
-  { label: "javascript", value: "js" },
-  { label: "jQuery", value: "jquery" },
-  { label: "React.js", value: "react" },
-  { label: "Redux", value: "redux" },
-];
-
-const selects = [
-  { label: "Friends", value: "Friends" },
-  { label: "Google", value: "Google" },
-  { label: "Social network", value: "Social network" },
-  { label: "Another ways", value: "Another ways" },
-];
 
 const onSubmit = (values) => {
   console.log(values);
@@ -49,12 +23,6 @@ const validationSchema = Yup.object({
   email: Yup.string()
     .email("email format is invalid")
     .required("email is required"),
-  phoneNumber: Yup.string()
-    .required("phone number is required")
-    .matches(/^[0-9]{11}$/, "phone number is invalid"),
-  gender: Yup.string().required("choose your gender is required"),
-  introduction: Yup.string().required("introduction is required"),
-  Skills: Yup.array().notRequired(),
   password: Yup.string()
     .required("password is required")
     .min(5, "password length must be equal or bigger than 5")
@@ -65,12 +33,9 @@ const validationSchema = Yup.object({
   passwordConfirmation: Yup.string()
     .required("password confirmation is required")
     .oneOf([Yup.ref("password"), null], "password must match"),
-  terms: Yup.boolean()
-    .required()
-    .oneOf([true], "You must accept the terms and conditions"),
 });
 
-const SignupForm = () => {
+const NewSignupForm = () => {
   //   const {
   //     handleSubmit,
   //     errors,
@@ -113,85 +78,35 @@ const SignupForm = () => {
           Sign up
         </h1>
 
-        <TextInputForm
-          {...getFieldProps("name")}
-          type="text"
-          name="name"
-          placeholder="Name..."
-          error={errors.name}
-          touched={touched.name}
-        />
-        <TextInputForm
-          {...getFieldProps("email")}
-          type="email"
-          name="email"
-          placeholder="Email..."
-          error={errors.email}
-          touched={touched.email}
-        />
-        <TextInputForm
-          {...getFieldProps("phoneNumber")}
-          type="text"
-          name="phoneNumber"
-          placeholder="Phone Number..."
-          error={errors.phoneNumber}
-          touched={touched.phoneNumber}
-        />
-        <SelectBoxForm
-          value={values.introduction}
-          options={selects}
-          name="introduction"
-          onChange={(opt) => setFieldValue("introduction", opt.value)}
-          error={errors.introduction}
-          touched={touched.introduction}
-          onBlur={() => setFieldTouched("introduction", true)}
-        />
-        <RadioInputForm
-          options={radios}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          name="gender"
-          formValue={values.gender}
-          error={errors.gender}
-          touched={touched.gender}
-        />
-        <CheckBoxForm
-          name="Skills"
-          options={checks}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          values={values.Skills}
-        />
-        <TextInputForm
-          {...getFieldProps("password")}
-          type="password"
-          name="password"
-          placeholder="Password..."
-          error={errors.password}
-          touched={touched.password}
-        />
-        <TextInputForm
-          {...getFieldProps("passwordConfirmation")}
-          type="password"
-          name="passwordConfirmation"
-          placeholder="Password Confirmation..."
-          error={errors.passwordConfirmation}
-          touched={touched.passwordConfirmation}
-        />
-        <SingleCheckBoxForm
-          error={errors.terms}
-          touched={touched.terms}
-          formValue={values.terms}
-          name="terms"
-          {...getFieldProps("terms")}
-        />
+        <fieldset>
+          <label htmlFor="name">name</label>
+          <Field type="text" id="name" name="name" />
+          <ErrorMessage name="name" />
+        </fieldset>
+        <fieldset>
+          <label htmlFor="email">email</label>
+          <Field type="email" id="email" name="email" />
+          <ErrorMessage name="email" />
+        </fieldset>
+        <fieldset>
+          <label htmlFor="password">password</label>
+          <Field type="password" id="password" name="password" />
+          <ErrorMessage name="password" />
+        </fieldset>
+        <fieldset>
+          <label htmlFor="passwordConfirmation">password confirmation</label>
+          <Field
+            type="password"
+            id="passwordConfirmation"
+            name="passwordConfirmation"
+          />
+          <ErrorMessage name="passwordConfirmation" />
+        </fieldset>
         <button
           className={`header border text-sm md:text-base border-blue-400 text-blue-400 font-bold tracking-widest outline-none py-2
-         w-full rounded-sm mt-7 ${
-           isValid ? "hover:text-white hover:bg-blue-400" : "cursor-not-allowed"
-         } transition disabled:text-blue-400 disabled:bg-transparent disabled:opacity-30`}
+         w-full rounded-sm mt-78`}
           type="submit"
-          disabled={!isValid}
+          //   disabled={!isValid}
         >
           submit
         </button>
@@ -200,4 +115,4 @@ const SignupForm = () => {
   );
 };
 
-export default SignupForm;
+export default NewSignupForm;
