@@ -12,6 +12,8 @@ const initialValues = {
   email: "",
   password: "",
   passwordConfirmation: "",
+  comment: "",
+  address: "",
 };
 
 const onSubmit = (values) => {
@@ -33,6 +35,8 @@ const validationSchema = Yup.object({
   passwordConfirmation: Yup.string()
     .required("password confirmation is required")
     .oneOf([Yup.ref("password"), null], "password must match"),
+  comment: Yup.string().required("comment is required"),
+  address: Yup.string().required("address is required"),
 });
 
 const NewSignupForm = () => {
@@ -102,9 +106,30 @@ const NewSignupForm = () => {
           />
           <ErrorMessage name="passwordConfirmation" />
         </fieldset>
+        <fieldset>
+          <label htmlFor="comment">comment</label>
+          <Field as="textarea" id="comment" name="comment" />
+          <ErrorMessage name="comment" />
+        </fieldset>
+        <fieldset>
+          <label htmlFor="address">address</label>
+          <Field name="address">
+            {(props) => {
+              console.log(props);
+              return (
+                <>
+                  <input type="text" id="address" {...props.field} />
+                  {props.meta.error && props.meta.touched && (
+                    <span>{props.meta.error}</span>
+                  )}
+                </>
+              );
+            }}
+          </Field>
+        </fieldset>
         <button
           className={`header border text-sm md:text-base border-blue-400 text-blue-400 font-bold tracking-widest outline-none py-2
-         w-full rounded-sm mt-78`}
+         w-full rounded-sm mt-7`}
           type="submit"
           //   disabled={!isValid}
         >
