@@ -1,11 +1,5 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import CheckBoxForm from "../InputForm/CheckBoxForm";
-import RadioInputForm from "../InputForm/RadioInputForm";
-import SelectBoxForm from "../InputForm/SelectBoxForm";
-import TextInputForm from "../InputForm/TextInputForm";
-import SingleCheckBoxForm from "../InputForm/SingleCheckBoxForm";
-import { Children, useEffect } from "react";
 
 const initialValues = {
   name: "",
@@ -18,6 +12,7 @@ const initialValues = {
     facebook: "",
     twitter: "",
   },
+  phoneNumber: [],
 };
 
 const onSubmit = (values) => {
@@ -48,31 +43,6 @@ const validationSchema = Yup.object({
 });
 
 const NewSignupForm = () => {
-  //   const {
-  //     handleSubmit,
-  //     errors,
-  //     touched,
-  //     getFieldProps,
-  //     isValid,
-  //     handleChange,
-  //     setFieldValue,
-  //     setFieldTouched,
-  //     handleBlur,
-  //     values,
-  //   } = useFormik({
-  //     initialValues,
-  //     onSubmit,
-  //     validationSchema,
-  //     validateOnMount: true,
-  //     enableReinitialize: true,
-  //   });
-
-  //   useEffect(() => {
-  //     if (values.introduction) {
-  //       setFieldTouched("introduction", false);
-  //     }
-  //   }, [values]);
-
   return (
     <Formik
       initialValues={initialValues}
@@ -143,6 +113,16 @@ const NewSignupForm = () => {
           <label htmlFor="twitter">twitter profile</label>
           <Field type="text" id="twitter" name="social.twitter" />
           <ErrorMessage name="social.twitter" component="span" />
+        </fieldset>
+        <fieldset>
+          <label htmlFor="firstPh">your phone number</label>
+          <Field type="text" id="firstPh" name="phoneNumber[0]" />
+          <ErrorMessage name="phoneNumber" component="span" />
+        </fieldset>
+        <fieldset>
+          <label htmlFor="twitter">dad phone number</label>
+          <Field type="text" id="twitter" name="phoneNumber[1]" />
+          <ErrorMessage name="phoneNumber" component="span" />
         </fieldset>
         <button
           className={`header border text-sm md:text-base border-blue-400 text-blue-400 font-bold tracking-widest outline-none py-2
