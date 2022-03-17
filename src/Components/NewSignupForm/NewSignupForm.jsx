@@ -14,6 +14,10 @@ const initialValues = {
   passwordConfirmation: "",
   comment: "",
   address: "",
+  social: {
+    facebook: "",
+    twitter: "",
+  },
 };
 
 const onSubmit = (values) => {
@@ -37,6 +41,10 @@ const validationSchema = Yup.object({
     .oneOf([Yup.ref("password"), null], "password must match"),
   comment: Yup.string().required("comment is required"),
   address: Yup.string().required("address is required"),
+  social: Yup.object({
+    facebook: Yup.string().required("facebook profile is required"),
+    twitter: Yup.string().required("twitter profile is required"),
+  }),
 });
 
 const NewSignupForm = () => {
@@ -116,18 +124,25 @@ const NewSignupForm = () => {
         <fieldset>
           <label htmlFor="address">address</label>
           <Field name="address">
-            {(props) => {
-              console.log(props);
-              return (
-                <>
-                  <input type="text" id="address" {...props.field} />
-                  {props.meta.error && props.meta.touched && (
-                    <span>{props.meta.error}</span>
-                  )}
-                </>
-              );
-            }}
+            {(props) => (
+              <>
+                <input type="text" id="address" {...props.field} />
+                {props.meta.error && props.meta.touched && (
+                  <span>{props.meta.error}</span>
+                )}
+              </>
+            )}
           </Field>
+        </fieldset>
+        <fieldset>
+          <label htmlFor="facebook">facebook profile</label>
+          <Field type="text" id="facebook" name="social.facebook" />
+          <ErrorMessage name="social.facebook" component="span" />
+        </fieldset>
+        <fieldset>
+          <label htmlFor="twitter">twitter profile</label>
+          <Field type="text" id="twitter" name="social.twitter" />
+          <ErrorMessage name="social.twitter" component="span" />
         </fieldset>
         <button
           className={`header border text-sm md:text-base border-blue-400 text-blue-400 font-bold tracking-widest outline-none py-2
