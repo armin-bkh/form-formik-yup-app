@@ -1,4 +1,4 @@
-import { Formik } from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import CheckBoxForm from "../InputForm/CheckBoxForm";
 import RadioInputForm from "../InputForm/RadioInputForm";
@@ -104,9 +104,8 @@ const SignupForm = () => {
       validateOnMount={true}
       enableReinitialize={true}
     >
-      <form
+      <Form
         className={`w-full md:max-w-lg rounded-md p-5 bg-pink-400 bg-opacity-30 backdrop-filter backdrop-blur-md`}
-        onSubmit={handleSubmit}
       >
         <h1
           className={`text-blue-400 text-4xl font-bold md:text-6xl mb-10 ml-3 tracking-wider header`}
@@ -196,7 +195,7 @@ const SignupForm = () => {
         >
           submit
         </button>
-      </form>
+      </Form>
     </Formik>
   );
 };
