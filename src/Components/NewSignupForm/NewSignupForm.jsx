@@ -5,7 +5,7 @@ import RadioInputForm from "../InputForm/RadioInputForm";
 import SelectBoxForm from "../InputForm/SelectBoxForm";
 import TextInputForm from "../InputForm/TextInputForm";
 import SingleCheckBoxForm from "../InputForm/SingleCheckBoxForm";
-import { useEffect } from "react";
+import { Children, useEffect } from "react";
 
 const initialValues = {
   name: "",
@@ -90,12 +90,14 @@ const NewSignupForm = () => {
         <fieldset>
           <label htmlFor="email">email</label>
           <Field type="email" id="email" name="email" />
-          <ErrorMessage name="email" />
+          <ErrorMessage name="email">
+            {(error) => <span style={{ color: "red" }}>{error}</span>}
+          </ErrorMessage>
         </fieldset>
         <fieldset>
           <label htmlFor="password">password</label>
           <Field type="password" id="password" name="password" />
-          <ErrorMessage name="password" />
+          <ErrorMessage name="password" component={ErrorMsg} />
         </fieldset>
         <fieldset>
           <label htmlFor="passwordConfirmation">password confirmation</label>
@@ -104,7 +106,7 @@ const NewSignupForm = () => {
             id="passwordConfirmation"
             name="passwordConfirmation"
           />
-          <ErrorMessage name="passwordConfirmation" />
+          <ErrorMessage name="passwordConfirmation" component="span" />
         </fieldset>
         <fieldset>
           <label htmlFor="comment">comment</label>
@@ -141,3 +143,7 @@ const NewSignupForm = () => {
 };
 
 export default NewSignupForm;
+
+const ErrorMsg = ({ children }) => {
+  return <span style={{ color: "red" }}>{children}</span>;
+};
