@@ -1,4 +1,5 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik";
+import React from "react";
 import * as Yup from "yup";
 
 const initialValues = {
@@ -12,7 +13,8 @@ const initialValues = {
     facebook: "",
     twitter: "",
   },
-  phoneNumber: [],
+  phoneNumber: ["", ""],
+  children: [""],
 };
 
 const onSubmit = (values) => {
@@ -120,9 +122,39 @@ const NewSignupForm = () => {
           <ErrorMessage name="phoneNumber" component="span" />
         </fieldset>
         <fieldset>
-          <label htmlFor="twitter">dad phone number</label>
-          <Field type="text" id="twitter" name="phoneNumber[1]" />
+          <label htmlFor="secPh">dad phone number</label>
+          <Field type="text" id="secPh" name="phoneNumber[1]" />
           <ErrorMessage name="phoneNumber" component="span" />
+        </fieldset>
+        <fieldset>
+          <label>your childrens name</label>
+          <FieldArray name="children">
+            {({
+              form: {
+                values: { children },
+              },
+              push,
+              remove,
+            }) =>
+              children.map((child, index) => (
+                <React.Fragment key={index}>
+                  <Field
+                    type="text"
+                    id={`children[${index}]`}
+                    name={`children[${index}]`}
+                  />
+                  {children.length > 1 && (
+                    <button type="button" onClick={() => remove(index)}>
+                      -
+                    </button>
+                  )}
+                  <button type="button" onClick={() => push("")}>
+                    +
+                  </button>
+                </React.Fragment>
+              ))
+            }
+          </FieldArray>
         </fieldset>
         <button
           className={`header border text-sm md:text-base border-blue-400 text-blue-400 font-bold tracking-widest outline-none py-2
