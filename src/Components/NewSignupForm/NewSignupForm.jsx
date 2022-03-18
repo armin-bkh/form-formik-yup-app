@@ -20,6 +20,7 @@ const initialValues = {
 const onSubmit = (values, formik) => {
   console.log(values);
   formik.setSubmitting(false);
+  formik.resetForm();
 };
 
 const validationSchema = Yup.object({
