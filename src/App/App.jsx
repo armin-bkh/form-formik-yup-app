@@ -7,8 +7,8 @@ const App = () => {
     <main
       className={`bg-gray-900 min-h-screen w-full flex justify-center items-center p-5`}
     >
-      {/* <SignupForm /> */}
-      <NewSignupForm />
+      <SignupForm />
+      {/* <NewSignupForm /> */}
     </main>
   );
 };
